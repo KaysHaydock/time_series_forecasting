@@ -86,3 +86,5 @@ conda env create -f binder/environment.yml
 ```bash
 conda activate hds_forecast
 ```
+
+Author: Kayleigh Haydock
