@@ -35,13 +35,17 @@ project/
 ├── 05_final_report.ipynb
 ├── 06_references.ipynb
 ├── images/
-│   └── auto_arima_graph.png
+│   ├── auto_arima_graph.png
 │   ├── naive_graph.png
 │   ├── box_plots.png
 │   ├── prophet_predictions.png
 │   └── prophet_graph.png
 ├── input/
 │   └── model_runs.keras
+├── model_predictions/
+│   ├── auto_arima_forecast.csv
+│   ├── naive1_forecast.csv
+│   └── prophet_forecast.csv
 ├── paediatrics_train.csv
 └──  ts_utils.py
 ```
