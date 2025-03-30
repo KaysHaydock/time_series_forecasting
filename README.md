@@ -1,94 +1,128 @@
-## Project Overview
+# Acute Stroke Unit Discrete Event Simulation (DES) - Replication of Monks et al. (2016)
 
-This project investigates **time series forecasting** for **paediatric emergency department attendances**. The dataset contains **daily ED attendance counts** from **01/04/2014 to 19/02/2017**. The objective is to develop and compare forecasting models to predict attendances for the next **28 days** and evaluate their performance.
+This repository contains a simplified Python-based recreation of the Discrete Event Simulation (DES) model described in:
 
-### **Goals**
-- **Understand seasonal trends** in paediatric ED attendances (weekly & monthly patterns).
-- **Develop and evaluate forecasting models** (Naive, ARIMA, and Prophet).
-- **Compare models using performance metrics** (MAE and Winkler scores for prediction intervals).
-- **Make recommendations** for staff planning based on forecast accuracy.
+> Monks T, Worthington D, Allen M, Pitt M, Stein K, James M. A modelling tool for capacity planning in acute and community stroke services. *BMC Health Services Research*. 2016;16:530. [https://doi.org/10.1186/s12913-016-1789-4](https://doi.org/10.1186/s12913-016-1789-4)
+
+The original model was developed using SIMUL8. This project recreates its core logic and experiments using Python, SimPy and Streamlit offering open and reproducible code with results.
 
 ---
+## Authors
+Kayleigh Haydock and Guled Abdullahi
 
-## Key Files
 
-### **Jupyter Notebooks**
-- `00_introduction.ipynb` – Project overview.
-- `01_data_exploration.ipynb` – Exploratory data analysis (EDA), visualising trends, seasonality and outliers.
-- `02_naive_model.ipynb` – Implements **Naive 1 and Seasonal Naive models** as benchmarks.
-- `03_arima_model.ipynb` – Develops and evaluates an **ARIMA models** for forecasting.
-- `04_prophet_model.ipynb` – Implements **Facebook Prophet models** for capturing trends and seasonality.
-- `05_final_report.ipynb` – Main report, insights and recommendations.
-- `06_references.ipynb` – References.
+## Project Structure
 
-### **Folder Structure**
-```bash
-project/
-├── README.md
-├── binder/
-│   └── environment.yml
-├── 00_introduction.ipynb
-├── 01_data_exploration.ipynb
-├── 02_naive_model.ipynb
-├── 03_arima_model.ipynb
-├── 04_prophet.ipynb
-├── 05_final_report.ipynb
-├── 06_references.ipynb
-├── images/
-│   ├── auto_arima_graph.png
-│   ├── naive_graph.png
-│   ├── box_plots.png
-│   ├── prophet_predictions.png
-│   └── prophet_graph.png
-├── input/
-│   └── model_runs.keras
-├── model_predictions/
-│   ├── auto_arima_forecast.csv
-│   ├── naive1_forecast.csv
-│   └── prophet_forecast.csv
-├── paediatrics_train.csv
-└──  ts_utils.py
+```
+.
+├── binder/                                 # Reproducible environment
+
+├── images/                                 # Diagrams and visual outputs
+│   ├── asu_model.png
+│   ├── replicated_model.png
+│   ├── dataframe_op.png
+│   └── comparison_delay_probability.png
+├── iterations/                             # Iterative development notebooks and Streamlit app builds
+│   ├── 1_iteration.ipynb
+│   ├── 2_iteration.ipynb
+│   ├── 3_iteration.ipynb
+│   ├── 4_iteration.ipynb
+│   ├── 5_iteration.ipynb
+│   ├── 6_iteration.ipynb
+│   ├── my_streamlit_app.py
+│   ├── my_streamlit_app_2.py
+│   └── my_streamlit_app_3.py
+├── papers/                                 # Original research article and appendix
+│   ├── Monks_et_al.pdf
+│   └── Monks_et_al_appendix.docx
+├── result/                                 # Simulation outputs and summary CSVs
+│   ├── default_scenario.csv
+│   ├── exclusion.csv
+│   ├── increas_scenario.csv
+│   └── comparison_delay_probability.png
+├── 7_iteration.ipynb                       # Final consolidated model notebook
+├── distribution.py                         # Parameter sampling logic
+├── LICENSE                                 # Project license
+├── .gitignore                              # Files to ignore in GitHub
+└── README.md                               # You're here!
 ```
 
-
-### **Data Files**
-- `paediatrics_train.csv` – The dataset containing **daily paediatric ED attendances**.
-
-### **Scripts**
-- `ts_utils.py` – Utility functions for time series preprocessing, modeling and evaluation.
-
 ---
+## How to Run
 
-## Methodology
+### Option 1: Local Setup
 
-### **1. Data Exploration**
-- Visualising **monthly and weekly seasonality**.
-- Identifying **trends and outliers**.
-- Applying **stationarity tests (ADF, KPSS)**.
+1. Clone the repo:
 
-### **2. Forecasting Models**
-| Model | Description |
-|-------|------------|
-| **Naive** | Baseline models for benchmarking, investigated Naive1 & SeasonalNaive |
-| **ARIMA** | Classical time series model (Auto-Regressive Integrated Moving Average) |
-| **FB Prophet** | Forecasting model designed for handling seasonality and holidays |
+```bash
+git clone https://github.com/KaysHaydock
+cd your-repo-name
+```
 
-### **3. Model Evaluation**
-- **MAE (Mean Absolute Error)** – Measures average forecast error.
-- **Winkler Score (80% & 90%)** – Evaluates prediction intervals.
+2. Create a virtual environment and install dependencies:
 
----
-
-## Installation & Setup
-
-To run the notebooks, set up the required environment:
-
-### **1. Conda Environment**
 ```bash
 conda env create -f binder/environment.yml
-```
-```bash
-conda activate hds_forecast
+conda activate sim_env
 ```
 
-Author: Kayleigh Haydock
+3. Open the notebook named (7_iteration):
+
+```bash
+jupyter lab
+```
+
+4. (Optional once finalised app) Launch the Streamlit app:
+
+```bash
+streamlit run iterations/my_streamlit_app_3.py
+```
+
+---
+
+## Features
+
+- Core DES logic of ASU patient arrivals, LOS and discharge routing
+- Warm-up analysis and multiple replications for statistical validity
+- Scenario analysis (base case, 5% increase, patient exclusion)
+- Visual outputs including delay probabilities vs bed capacity
+- Streamlit app for interactive model exploration (still in draft progress)
+
+---
+
+## Key Visuals
+
+**Model Comparison**
+
+![ASU Original](images/asu_model.png)
+![Replicated Model](images/replicated_model.png)
+
+**Output Example**
+
+![Simulation Output](images/comparison_delay_probability.png)
+
+---
+
+## Referenced Material
+
+- `papers/Monks_et_al.pdf` — Original publication
+- `papers/Monks_et_al_appendix.docx` — Supplementary data used for parameters
+
+---
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](./LICENSE) file for details.
+
+---
+
+## Acknowledgements
+
+- Original DES model by Monks et al. (2016)
+- Supported by Health Data Science and Operations Research GitHub resources
+- Streamlit for enabling rapid UI deployment (which is still in progress)
+
+---
+## Contact
+
+For questions, please raise an issue or contact one of the project contributors
