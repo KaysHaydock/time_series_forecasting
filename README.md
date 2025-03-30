@@ -40,6 +40,7 @@ Kayleigh Haydock and Guled Abdullahi
 │   ├── increas_scenario.csv
 │   └── comparison_delay_probability.png
 ├── 7_iteration.ipynb                       # Final consolidated model notebook
+├── final_report.ipynb                      # Final report write-up
 ├── distribution.py                         # Parameter sampling logic
 ├── LICENSE                                 # Project license
 ├── .gitignore                              # Files to ignore in GitHub
