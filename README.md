@@ -15,8 +15,7 @@ Kayleigh Haydock and Guled Abdullahi
 
 ```
 .
-├── binder/                                 # Reproducible environment
-
+├── binder/                                 # Reproducible conda environment
 ├── images/                                 # Diagrams and visual outputs
 │   ├── asu_model.png
 │   ├── replicated_model.png
